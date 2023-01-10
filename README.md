@@ -3,7 +3,7 @@
 Hi there, I'm trying to create a program/library that lets me understand how encryption works.
 I may plan to add an entire encrypted file format.
 
-**DISCLAIMER: this library isn't meant to be used in any harmful way, so if it will be used in such a way, it's not my fault.**
+**⚠️⚠️DISCLAIMER⚠️⚠️: this library isn't meant to be used in any harmful way, so if it will be used in such a way, it's not my fault.**
 
 ROADMAP:
 - [ ] Undestand how encryption works
