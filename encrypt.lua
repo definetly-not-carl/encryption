@@ -1,31 +1,33 @@
 #!/usr/bin/lua
 
 function Encrypt()
-	-- it should do something, but it doesn't do anything right now
+	local stringa = Input_read --just for safety
 	local value = {}
-	local temp = ""
+	--local temp = tostring(stringa.byte(Input_read,1))
 
-	for i=0, #Input_read do
+	for i=1, #Input_read do --it reads the value and then calls the other function to change the every single character into an hex value
+		local temp = tostring(stringa.byte(Input_read,i))
 		local int_val = temp.byte(Input_read,i)
-		--print(temp)
-		local hex= Tohex(int_val)
+		--print(int_val)
+		local hex= Tohex(tonumber(int_val))
 		value[i]=hex
 		--print(value[i])
 	end
-	local encypted = value[0]
-	local j=1
-	while value[j]~=nil do
-		encypted = encypted .. value[j]
+	local encrypted = value[1]
+	local j=2
+	while value[j]~=nil do --it jut concatenates the string
+		encrypted = encrypted .. value[j]
 		j=j+1
 	end
+	return encrypted
 end
 
-function Tohex(number)
+function Tohex(number) --NOTE: this function works with every character that you input, but the decrypting one could have some problems to do so
 	local remainders = {}
 	local i=0
 	local Dictionary = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"}
-	if number > 16 then
-		while number > 16 do
+	if number > 16 then --making the selection
+		while number > 16 do --trnasforming the input value into an hex
 			remainders[i]=number%16
 			number = math.floor(number /16)
 			--print(remainders[i])
@@ -40,7 +42,7 @@ function Tohex(number)
 			end
 		end
 		--print("\n")
-		local string = Dictionary[remainders[i]+1]
+		local string = Dictionary[remainders[i]+1] -- connecting int value to hex value
 		for j=i-1, 0, -1 do
 			string = string .. Dictionary[remainders[j]+1]
 		end
@@ -62,4 +64,5 @@ end
 print("Hi, this is a program that encrypts strings. Please enter your input: ")
 Input_read = io.read()
 
-Encrypt()
+local hexed = Encrypt()
+print(hexed)
