@@ -61,6 +61,14 @@ function Tohex(number) --NOTE: this function works with every character that you
 	end
 end
 
+function Decrypt()
+	print("idk, it's doing nothing rn")
+end
+
+function Unhex()
+	print("idk, it's doing nothing rn")
+end
+
 print("Hi, this is a program that encrypts strings. Please enter your input: ")
 Input_read = io.read()
 
