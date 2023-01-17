@@ -61,12 +61,14 @@ function Tohex(number) --NOTE: this function works with every character that you
 	end
 end
 
-function Decrypt()
+function Decrypt(encrypted_string)
 	print("idk, it's doing nothing rn")
+	return encrypted_string
 end
 
-function Unhex()
+function Unhex(number_to_decrypt)
 	print("idk, it's doing nothing rn")
+	return number_to_decrypt
 end
 
 print("Hi, this is a program that encrypts strings. Please enter your input: ")
