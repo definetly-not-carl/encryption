@@ -11,5 +11,9 @@ ROADMAP:
 - [ ] Use the library/file to encrypt a file
 - [ ] Create a file format that contains other files that are encrypted (ex.: encrypted zip-files)
 
+I've recently come to an error: if you try to feed into the program characters such as "è", it will spit out a sequence of 2 hexadecimal numbers that are not correct.
+I believe it has something to do with the Lua function string.byte(), because it gives back a value of 195 instead of a value of 232.
+Please, try to find why it happens, cause I'm really struggling to find an answer.
+
 Thanks for your attention.
 ~DefinetlyNotCarl

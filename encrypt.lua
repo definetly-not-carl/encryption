@@ -13,10 +13,10 @@ function Encrypt()
 		value[i]=hex
 		--print(value[i])
 	end
-	local encrypted = value[1]
+	local encrypted = value[1] .. " "
 	local j=2
 	while value[j]~=nil do --it jut concatenates the string
-		encrypted = encrypted .. value[j]
+		encrypted = encrypted .. value[j] .. " "
 		j=j+1
 	end
 	return encrypted
@@ -76,3 +76,6 @@ Input_read = io.read()
 
 local hexed = Encrypt()
 print(hexed)
+
+local unhexed = Decrypt(hexed)
+print(unhexed)
