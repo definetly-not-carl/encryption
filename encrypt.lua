@@ -62,11 +62,16 @@ function Tohex(number) --NOTE: this function works with every character that you
 end
 
 function Decrypt(encrypted_string)
+	--there should be a function that takes the input strig and makes a parsing until it encounters a " " (white space)
+	local hex_number = {}
+	
 	print("idk, it's doing nothing rn")
 	return encrypted_string
 end
 
 function Unhex(number_to_decrypt)
+	local Dictionary = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"}
+	--there should be a function that multiplies each character in hex to the corresponding power of 16
 	print("idk, it's doing nothing rn")
 	return number_to_decrypt
 end
