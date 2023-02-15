@@ -64,9 +64,16 @@ end
 function Decrypt(encrypted_string)
 	--there should be a function that takes the input strig and makes a parsing until it encounters a " " (white space)
 	local hex_number = {}
-	
-	print("idk, it's doing nothing rn")
-	return encrypted_string
+	local unhexed_number = {}
+	local unhexed_string = ""
+	local string = ""
+	local counter=1
+	for i in string.gmatch(encrypted_string, "[^%s]+") do
+		hex_number[counter]=i
+		unhexed_number[counter]=Unhex(hex_number[counter])
+		unhexed_string = unhexed_string .. string.char(unhexed_number[i])
+		counter=counter+1
+	end
 end
 
 function Unhex(number_to_decrypt)
@@ -83,4 +90,4 @@ local hexed = Encrypt()
 print(hexed)
 
 local unhexed = Decrypt(hexed)
-print(unhexed)
+--print(unhexed)
