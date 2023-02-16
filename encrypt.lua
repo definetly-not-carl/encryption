@@ -63,31 +63,40 @@ end
 
 function Decrypt(encrypted_string)
 	--there should be a function that takes the input strig and makes a parsing until it encounters a " " (white space)
-	local hex_number = {}
 	local unhexed_number = {}
 	local unhexed_string = ""
 	local string = ""
 	local counter=1
 	for i in string.gmatch(encrypted_string, "[^%s]+") do
-		hex_number[counter]=i
-		unhexed_number[counter]=Unhex(hex_number[counter])
-		unhexed_string = unhexed_string .. string.char(unhexed_number[i])
+		local hex_number=i
+		unhexed_number[counter]=Unhex(hex_number)
+		unhexed_string = unhexed_string .. string.char(unhexed_number[counter])
 		counter=counter+1
 	end
+	return unhexed_string
 end
 
 function Unhex(number_to_decrypt)
-	local Dictionary = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"}
+	local Dictionary = {["0"]=0,["1"]=1,["2"]=2,["3"]=3,["4"]=4,["5"]=5,["6"]=6,["7"]=7,["8"]=8,["9"]=9,["A"]=10,["B"]=11,["C"]=12,["D"]=13,["E"]=14,["F"]=15}
+	--A1
+	--12
+	--10
+	local decrypted_number=0
+	for i=1, #number_to_decrypt do
+		decrypted_number = decrypted_number + Dictionary[string.sub(number_to_decrypt,i,i)]*16^(#number_to_decrypt-i)
+		--print(string.sub(number_to_decrypt,i,i),Dictionary[string.sub(number_to_decrypt,i,i)])
+		--print(decrypted_number)
+	end
 	--there should be a function that multiplies each character in hex to the corresponding power of 16
-	print("idk, it's doing nothing rn")
-	return number_to_decrypt
+	--print("idk, it's doing nothing rn")
+	return decrypted_number
 end
 
 print("Hi, this is a program that encrypts strings. Please enter your input: ")
 Input_read = io.read()
 
 local hexed = Encrypt()
-print(hexed)
+print("encrypted string: ",hexed)
 
 local unhexed = Decrypt(hexed)
---print(unhexed)
+print("unencrypted string: ",unhexed)

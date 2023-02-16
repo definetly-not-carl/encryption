@@ -15,5 +15,7 @@ I've recently come to an error: if you try to feed into the program characters s
 I believe it has something to do with the Lua function string.byte(), because it gives back a value of 195 instead of a value of 232.
 Please, try to find why it happens, cause I'm really struggling to find an answer.
 
+**Update about the previous issue:** I believe that Lua translates these kinds of characters to two characters, but it translates them back to their original form when you use string.char(). I believe that this is an explaination of the phenomenon that is happening
+
 Thanks for your attention.
 ~DefinetlyNotCarl
