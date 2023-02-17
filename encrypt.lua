@@ -2,22 +2,11 @@
 
 function Encrypt()
 	local stringa = Input_read --just for safety
-	local value = {}
-	--local temp = tostring(stringa.byte(Input_read,1))
-
+	local encrypted = ""
 	for i=1, #Input_read do --it reads the value and then calls the other function to change the every single character into an hex value
 		local temp = tostring(stringa.byte(Input_read,i))
 		local int_val = temp.byte(Input_read,i)
-		--print(int_val)
-		local hex= Tohex(tonumber(int_val))
-		value[i]=hex
-		--print(value[i])
-	end
-	local encrypted = value[1] .. " "
-	local j=2
-	while value[j]~=nil do --it jut concatenates the string
-		encrypted = encrypted .. value[j] .. " "
-		j=j+1
+		encrypted = encrypted .. Tohex(tonumber(int_val)) .. " "
 	end
 	return encrypted
 end
@@ -62,15 +51,13 @@ function Tohex(number) --NOTE: this function works with every character that you
 end
 
 function Decrypt(encrypted_string)
-	--there should be a function that takes the input strig and makes a parsing until it encounters a " " (white space)
-	local unhexed_number = {}
+	-- there should be a function that takes the input strig and makes a parsing until it encounters a " " (white space)
 	local unhexed_string = ""
 	local string = ""
 	local counter=1
 	for i in string.gmatch(encrypted_string, "[^%s]+") do
 		local hex_number=i
-		unhexed_number[counter]=Unhex(hex_number)
-		unhexed_string = unhexed_string .. string.char(unhexed_number[counter])
+		unhexed_string = unhexed_string .. string.char(Unhex(hex_number))
 		counter=counter+1
 	end
 	return unhexed_string
