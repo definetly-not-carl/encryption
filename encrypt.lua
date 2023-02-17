@@ -48,7 +48,6 @@ function Tohex(number) --NOTE: this function works with every character that you
 end
 
 function Decrypt(encrypted_string)
-	-- there should be a function that takes the input strig and makes a parsing until it encounters a " " (white space)
 	local unhexed_string = ""
 	for i in string.gmatch(encrypted_string, "[^%s]+") do
 		unhexed_string = unhexed_string .. string.char(Unhex(i)) --this string gets continously updated by adding new bits of string every time (it converts a number obtained by the function Unhex into a character)
@@ -64,7 +63,6 @@ function Unhex(number_to_decrypt)
 		--print(string.sub(number_to_decrypt,i,i),Dictionary[string.sub(number_to_decrypt,i,i)])
 		--print(decrypted_number)
 	end
-	--there should be a function that multiplies each character in hex to the corresponding power of 16
 	return decrypted_number
 end
 
