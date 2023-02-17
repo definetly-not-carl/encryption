@@ -1,12 +1,9 @@
 #!/usr/bin/lua
 
-function Encrypt()
-	local stringa = Input_read --just for safety
+function Encrypt(input)
 	local encrypted = ""
-	for i=1, #Input_read do --it reads the value and then calls the other function to change the every single character into an hex value
-		local temp = tostring(stringa.byte(Input_read,i))
-		local int_val = temp.byte(Input_read,i)
-		encrypted = encrypted .. Tohex(tonumber(int_val)) .. " "
+	for i=1, #input do --it reads the value and then calls the other function to change the every single character into an hex value
+		encrypted = encrypted .. Tohex(tonumber(string.byte(input,i))) .. " " --this variable continues to add to itself bits that the Tohex() function gives after entering the corresponding number to a character
 	end
 	return encrypted
 end
@@ -54,8 +51,7 @@ function Decrypt(encrypted_string)
 	-- there should be a function that takes the input strig and makes a parsing until it encounters a " " (white space)
 	local unhexed_string = ""
 	for i in string.gmatch(encrypted_string, "[^%s]+") do
-		local hex_number=i
-		unhexed_string = unhexed_string .. string.char(Unhex(hex_number)) --this string gets continously updated by adding new bits of string every time (it converts a number obtained by the function Unhex into a character)
+		unhexed_string = unhexed_string .. string.char(Unhex(i)) --this string gets continously updated by adding new bits of string every time (it converts a number obtained by the function Unhex into a character)
 	end
 	return unhexed_string
 end
@@ -73,9 +69,9 @@ function Unhex(number_to_decrypt)
 end
 
 print("Hi, this is a program that encrypts strings. Please enter your input: ")
-Input_read = io.read()
+local Input_read = io.read()
 
-local hexed = Encrypt()
+local hexed = Encrypt(Input_read)
 print("encrypted string: ",hexed)
 
 local unhexed = Decrypt(hexed)
