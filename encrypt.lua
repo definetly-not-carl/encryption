@@ -49,7 +49,7 @@ end
 
 function Decrypt(encrypted_string)
 	local unhexed_string = ""
-	for i in string.gmatch(encrypted_string, "[^%s]+") do
+	for i in string.gmatch(encrypted_string, "[^%s]+") do --it searches the white space and assings it to the variable i
 		unhexed_string = unhexed_string .. string.char(Unhex(i)) --this string gets continously updated by adding new bits of string every time (it converts a number obtained by the function Unhex into a character)
 	end
 	return unhexed_string
