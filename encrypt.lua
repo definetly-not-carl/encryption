@@ -66,6 +66,8 @@ function Unhex(number_to_decrypt)
 	return decrypted_number
 end
 
+-- the following part will be changed in order to let the user choose if they want to inset a string (and get the output printed or in a file) or a file (that gets crypted into another one)
+
 print("Hi, this is a program that encrypts strings. Please enter your input: ")
 local Input_read = io.read()
 
