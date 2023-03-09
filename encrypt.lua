@@ -1,5 +1,19 @@
 #!/usr/bin/lua
 
+function Multiple_encryption(number, input)
+	for i=1, number, 1 do
+		input=Encrypt(input)
+	end
+	return input
+end
+
+function Multiple_decryption(number, input)
+	for i=1,number, 1 do
+		input=Decrypt(input)
+	end
+	return input
+end
+
 function Encrypt(input)
 	local encrypted = ""
 	for i=1, #input do --it reads the value and then calls the other function to change the every single character into an hex value
@@ -70,6 +84,14 @@ end
 
 print("Hi, this is a program that encrypts strings. Please enter your input: ")
 local Input_read = io.read()
+
+print("Please insert the number of times that you want it encrypted: ")
+local number_encryption = tonumber(io.read())
+local multiple_hex = Multiple_encryption(number_encryption, Input_read)
+print("multiple times encrypted string: ",multiple_hex)
+
+local multiple_decrypt = Multiple_decryption(number_encryption, multiple_hex)
+print("multiple times decrypted string: ", multiple_decrypt)
 
 local hexed = Encrypt(Input_read)
 print("encrypted string: ",hexed)
