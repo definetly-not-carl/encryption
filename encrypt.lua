@@ -93,8 +93,10 @@ print("multiple times encrypted string: ",multiple_hex)
 local multiple_decrypt = Multiple_decryption(number_encryption, multiple_hex)
 print("multiple times decrypted string: ", multiple_decrypt)
 
+--[[
 local hexed = Encrypt(Input_read)
 print("encrypted string: ",hexed)
 
 local unhexed = Decrypt(hexed)
 print("unencrypted string: ",unhexed)
+]]--
