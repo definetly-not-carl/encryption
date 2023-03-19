@@ -22,7 +22,7 @@ function Encrypt(input)
 	return encrypted
 end
 
-function Tohex(number) --NOTE: this function works with every character that you input, but the decrypting one could have some problems to do so
+function Tohex(number) --NOTE: this function works with every character that you input
 	local remainders = {}
 	local i=0
 	local Dictionary = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"}
@@ -82,21 +82,24 @@ end
 
 -- the following part will be changed in order to let the user choose if they want to inset a string (and get the output printed or in a file) or a file (that gets crypted into another one)
 
-print("Hi, this is a program that encrypts strings. Please enter your input: ")
-local Input_read = io.read()
+print("Choose if you want to enter a single (s)tring or a (f)ile: ")
+local mode = io.read()
 
-print("Please insert the number of times that you want it encrypted: ")
-local number_encryption = tonumber(io.read())
-local multiple_hex = Multiple_encryption(number_encryption, Input_read)
-print("multiple times encrypted string: ",multiple_hex)
+if mode=="s" then
+	print("Please enter your input string: ")
+	local Input_read = io.read()
 
-local multiple_decrypt = Multiple_decryption(number_encryption, multiple_hex)
-print("multiple times decrypted string: ", multiple_decrypt)
+	print("Please insert the number of times that you want it encrypted: ")
+	local number_encryption = tonumber(io.read())
 
---[[
-local hexed = Encrypt(Input_read)
-print("encrypted string: ",hexed)
+	local multiple_hex = Multiple_encryption(number_encryption, Input_read)
+	print("multiple times encrypted string: "..multiple_hex)
 
-local unhexed = Decrypt(hexed)
-print("unencrypted string: ",unhexed)
-]]--
+	local multiple_decrypt = Multiple_decryption(number_encryption, multiple_hex)
+	print("multiple times decrypted string: "..multiple_decrypt)
+elseif mode=="f" then
+	-- to be implemented
+	print("TODO\n")
+else
+	print(mode.." isn't a valid input, try 's' or 'f'\n")
+end
