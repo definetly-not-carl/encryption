@@ -59,7 +59,7 @@ function Tohex(number) --NOTE: this function works with every character that you
 			return number1
 		end
 	end
-end
+end -- it's horrendous, but it works, therefore do not complain
 
 function Decrypt(encrypted_string)
 	local unhexed_string = ""
@@ -82,7 +82,7 @@ end
 
 -- the following part will be changed in order to let the user choose if they want to inset a string (and get the output printed or in a file) or a file (that gets crypted into another one)
 
-print("Choose if you want to enter a single (s)tring or a (f)ile: ")
+print("Choose if you want to enter a single (s)tring, a (f)ile or (d)ecrypt: ")
 local mode = io.read()
 
 if mode=="s" then
@@ -95,11 +95,45 @@ if mode=="s" then
 	local multiple_hex = Multiple_encryption(number_encryption, Input_read)
 	print("multiple times encrypted string: "..multiple_hex)
 
-	local multiple_decrypt = Multiple_decryption(number_encryption, multiple_hex)
-	print("multiple times decrypted string: "..multiple_decrypt)
 elseif mode=="f" then
-	-- to be implemented
-	print("TODO\n")
+	print("Please enter your file name (and path): ")
+	local File_name = io.read()
+
+	local file = io.open(File_name, "r")
+	if not file then return nil end
+	local content = file:read("*a")
+
+	print("Please insert the number of times that you want it encrypted: ")
+	local number_encryption = tonumber(io.read())
+
+	local multiple_hex = Multiple_encryption(number_encryption, content)
+	print("multiple times encrypted string: "..multiple_hex)
+
+	local encr_file = io.open(File_name..".hex", "w")
+	if not encr_file then return nil end
+	encr_file:write(multiple_hex)
+
+elseif mode=="d" then
+	print("Please enter your input string: ")
+	local Input_read = io.read()
+
+	print("Please insert the number of times that you want it decrypted: ")
+	local number_encryption = tonumber(io.read())
+
+	local multiple_decrypt = Multiple_decryption(number_encryption, Input_read)
+	print("multiple times decrypted string: "..multiple_decrypt)
+
 else
-	print(mode.." isn't a valid input, try 's' or 'f'\n")
+	print(mode.." isn't a valid input, try 's', 'f' or 'd'\n")
+end
+
+function Main()
+	local switch={
+	["s"]=0 --write function for string input
+	,
+	["f"]=1 --write function for file input
+	,
+	["d"]=2
+	}
+	-- the else part is done in another way, check on internet
 end
