@@ -8,7 +8,7 @@ I may plan to add an entire encrypted file format.
 ROADMAP:
 - [x] Undestand how encryption works (*ish*)
 - [x] Create a file/library that lets me encrypt messages ~with a [key](#Explaination)~
-- [ ] Use the library/file to encrypt a file
+- [x] Use the library/file to encrypt a file
 - [ ] Create a file format that contains other files that are encrypted (ex.: encrypted zip-files)
 
 I've recently come to an error: if you try to feed into the program characters such as "è", it will spit out a sequence of 2 hexadecimal numbers that are not correct.

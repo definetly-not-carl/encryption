@@ -82,10 +82,10 @@ end
 
 -- the following part will be changed in order to let the user choose if they want to inset a string (and get the output printed or in a file) or a file (that gets crypted into another one)
 
-print("Choose if you want to enter a single (s)tring, a (f)ile or (d)ecrypt: ")
+print("Choose if you want to enter ecnrypt a single string (se), to ecnrypt a file (fe), to decrypt a string (sd) or to decrypt a file (fd): ")
 local mode = io.read()
 
-if mode=="s" then
+if mode=="se" then
 	print("Please enter your input string: ")
 	local Input_read = io.read()
 
@@ -95,7 +95,7 @@ if mode=="s" then
 	local multiple_hex = Multiple_encryption(number_encryption, Input_read)
 	print("multiple times encrypted string: "..multiple_hex)
 
-elseif mode=="f" then
+elseif mode=="fe" then
 	print("Please enter your file name (and path): ")
 	local File_name = io.read()
 
@@ -107,13 +107,16 @@ elseif mode=="f" then
 	local number_encryption = tonumber(io.read())
 
 	local multiple_hex = Multiple_encryption(number_encryption, content)
-	print("multiple times encrypted string: "..multiple_hex)
+	print("multiple times encrypted file: ".."\n"..multiple_hex)
 
 	local encr_file = io.open(File_name..".hex", "w")
 	if not encr_file then return nil end
 	encr_file:write(multiple_hex)
 
-elseif mode=="d" then
+	file:close()
+	encr_file:close()
+
+elseif mode=="sd" then
 	print("Please enter your input string: ")
 	local Input_read = io.read()
 
@@ -123,17 +126,40 @@ elseif mode=="d" then
 	local multiple_decrypt = Multiple_decryption(number_encryption, Input_read)
 	print("multiple times decrypted string: "..multiple_decrypt)
 
+elseif mode=="fd" then
+	print("Please enter your file name (and path): ")
+	local File_name = io.read()
+
+	local file = io.open(File_name, "r")
+	if not file then return nil end
+	local content = file:read("*a")
+
+	print("Please insert the number of times that you want it dencrypted: ")
+	local number_encryption = tonumber(io.read())
+	
+	local multiple_decrypt = Multiple_decryption(number_encryption, content)
+	print("multiple times decrypted string: ".."\n"..multiple_decrypt)
+
+	local decr_file = io.open("decr_"..File_name, "w")
+	if not decr_file then return nil end
+	decr_file:write(multiple_decrypt)
+
+	file:close()
+	decr_file:close()
+
 else
-	print(mode.." isn't a valid input, try 's', 'f' or 'd'\n")
+	print(mode.." isn't a valid input, try 'se', 'fe', 'sd' or 'se'")
 end
 
 function Main()
 	local switch={
-	["s"]=0 --write function for string input
+	["se"]=0 --write function for string encription
 	,
-	["f"]=1 --write function for file input
+	["fe"]=1 --write function for file encription
 	,
-	["d"]=2
+	["sd"]=2 --write function for string decription
+	,
+	["fd"]=3 --write function for file decription
 	}
 	-- the else part is done in another way, check on internet
 end
