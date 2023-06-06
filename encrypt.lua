@@ -80,12 +80,7 @@ function Unhex(number_to_decrypt)
 	return decrypted_number
 end
 
--- the following part will be changed in order to let the user choose if they want to inset a string (and get the output printed or in a file) or a file (that gets crypted into another one)
-
-print("Choose if you want to enter ecnrypt a single string (se), to ecnrypt a file (fe), to decrypt a string (sd) or to decrypt a file (fd): ")
-local mode = io.read()
-
-if mode=="se" then
+function Se()
 	print("Please enter your input string: ")
 	local Input_read = io.read()
 
@@ -94,8 +89,9 @@ if mode=="se" then
 
 	local multiple_hex = Multiple_encryption(number_encryption, Input_read)
 	print("multiple times encrypted string: "..multiple_hex)
+end
 
-elseif mode=="fe" then
+function Fe()
 	print("Please enter your file name (and path): ")
 	local File_name = io.read()
 
@@ -115,8 +111,9 @@ elseif mode=="fe" then
 
 	file:close()
 	encr_file:close()
+end
 
-elseif mode=="sd" then
+function Sd()
 	print("Please enter your input string: ")
 	local Input_read = io.read()
 
@@ -125,8 +122,9 @@ elseif mode=="sd" then
 
 	local multiple_decrypt = Multiple_decryption(number_encryption, Input_read)
 	print("multiple times decrypted string: "..multiple_decrypt)
+end
 
-elseif mode=="fd" then
+function Fd()
 	print("Please enter your file name (and path): ")
 	local File_name = io.read()
 
@@ -146,20 +144,26 @@ elseif mode=="fd" then
 
 	file:close()
 	decr_file:close()
+end
 
-else
-	print(mode.." isn't a valid input, try 'se', 'fe', 'sd' or 'se'")
+function Help()
+	print("To use this program, you need to write 'lua encrypt.lua *mode*'.\nThen you need to follow the written instructions")
 end
 
 function Main()
-	local switch={
-	["se"]=0 --write function for string encription
-	,
-	["fe"]=1 --write function for file encription
-	,
-	["sd"]=2 --write function for string decription
-	,
-	["fd"]=3 --write function for file decription
-	}
-	-- the else part is done in another way, check on internet
+	if arg[1]==nil then
+		print("invalid argument, try 'se', 'fe', 'sd', 'fd' or 'help'")
+		Help()
+		return
+	elseif arg[1]=="se" then Se()
+	elseif arg[1]=="sd" then Sd()
+	elseif arg[1]=="fe" then Fe()
+	elseif arg[1]=="fd" then Fd()
+	elseif arg[1]=="help" then Help()
+	else
+		print(arg[1].." isn't a valid input, try 'se', 'fe', 'sd', 'fd' or 'help'")
+	end
+	--print(arg[0].." "..arg[1])
 end
+
+Main()
